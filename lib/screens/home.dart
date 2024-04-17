@@ -71,7 +71,6 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
-
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
@@ -88,15 +87,37 @@ class _HomeState extends State<Home> {
               ),
             ),
             ListTile(
-              title: Text(''),
+              leading: Icon(Icons.home), // Add icon next to text
+              title: Text('Home'),
+              onTap: () {
+                // Implement functionality for the Home menu item
+              },
             ),
             ListTile(
-              title: Text(''),
+              leading: Icon(Icons.timer), // Add icon next to text
+              title: Text('Timer'),
+              onTap: () {
+                // Implement functionality for the Timer menu item
+              },
             ),
-            // Добавьте дополнительные пункты меню по вашему выбору
+            ListTile(
+              leading: Icon(Icons.settings), // Add icon next to text
+              title: Text('Settings'),
+              onTap: () {
+                // Implement functionality for the Settings menu item
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.contact_mail), // Add icon next to text
+              title: Text('Contact us'),
+              onTap: () {
+                // Implement functionality for the Contact us menu item
+              },
+            ),
           ],
         ),
       ),
+
       body: Column(
         children: [
           Expanded(
