@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../model/todo.dart';
 import '../constants/colors.dart';
 import '../widgets/todo_item.dart';
+import 'timer.dart';
+import 'settings.dart';
 
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
@@ -47,6 +49,26 @@ class _HomeState extends State<Home> {
   void _deleteToDoItem(String id) async {
     await _firestore.collection('todos').doc(id).delete();
     _fetchToDoList();
+  }
+
+  void _showContactPopup(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Contact Us'),
+          content: Text('Please email us at example@example.com'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Close'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -97,27 +119,27 @@ class _HomeState extends State<Home> {
               leading: Icon(Icons.timer), // Add icon next to text
               title: Text('Timer'),
               onTap: () {
-                // Implement functionality for the Timer menu item
+                Navigator.push(context, MaterialPageRoute(builder: (context) => TimerScreen())); // Navigate to TimerScreen
               },
             ),
             ListTile(
               leading: Icon(Icons.settings), // Add icon next to text
               title: Text('Settings'),
               onTap: () {
-                // Implement functionality for the Settings menu item
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsScreen())); // Navigate to SettingsScreen
               },
             ),
             ListTile(
               leading: Icon(Icons.contact_mail), // Add icon next to text
               title: Text('Contact us'),
               onTap: () {
-                // Implement functionality for the Contact us menu item
+                Navigator.pop(context);
+                _showContactPopup(context); // Implement functionality for the Contact us menu item
               },
             ),
           ],
         ),
       ),
-
       body: Column(
         children: [
           Expanded(
